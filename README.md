@@ -101,8 +101,8 @@ University of Technology | Graduated 2019
 ## 📫 Contact
 
 - **GitHub:** [@sebastianmihai01](https://github.com/sebastianmihai01)
-- **LinkedIn:** [linkedin.com/in/sebastianmihai](https://linkedin.com/in/sebastianmihai)
-- **Email:** sebastian.mihai@example.com
+- **LinkedIn:** [linkedin.com/in/sebastianmihai01](https://linkedin.com/in/sebastianmihai01)
+- **Email:** sebastian.mihai01@example.com
 
 ---
 
