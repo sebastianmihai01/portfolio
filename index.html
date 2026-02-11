@@ -1,0 +1,1059 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Software Engineer - Backend Development, Microservices, Cloud Architecture">
+    <title>Sebastian Mihai - Portfolio</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #e0e0e0;
+            background: #0a0a0f;
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        /* Animated Background */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: 
+                radial-gradient(circle at 20% 50%, rgba(102, 126, 234, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 80% 80%, rgba(118, 75, 162, 0.1) 0%, transparent 50%);
+            z-index: 0;
+            animation: backgroundPulse 10s ease-in-out infinite;
+        }
+
+        @keyframes backgroundPulse {
+            0%, 100% { opacity: 0.3; }
+            50% { opacity: 0.6; }
+        }
+
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: rgba(15, 15, 25, 0.85);
+            backdrop-filter: blur(15px);
+            z-index: 1000;
+            box-shadow: 0 2px 30px rgba(102, 126, 234, 0.2);
+            border-bottom: 1px solid rgba(102, 126, 234, 0.2);
+        }
+
+        .nav-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 20px 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.5em;
+            font-weight: bold;
+            color: white;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .logo::before {
+            content: '👋';
+            font-size: 1.3em;
+        }
+
+        .logo:hover {
+            color: #667eea;
+            transform: scale(1.05);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 40px;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: #b0b0b0;
+            text-decoration: none;
+            font-size: 1em;
+            padding: 8px 20px;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+            position: relative;
+            font-weight: 500;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            width: 0;
+            height: 2px;
+            background: linear-gradient(90deg, #667eea, #764ba2);
+            transform: translateX(-50%);
+            transition: width 0.3s ease;
+        }
+
+        .nav-links a:hover {
+            color: white;
+        }
+
+        .nav-links a:hover::after {
+            width: 80%;
+        }
+
+        .nav-links a.active {
+            color: #667eea;
+        }
+
+        /* Mobile Menu Toggle */
+        .menu-toggle {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+        }
+
+        .menu-toggle span {
+            width: 25px;
+            height: 3px;
+            background: white;
+            margin: 3px 0;
+            transition: 0.3s;
+            border-radius: 2px;
+        }
+
+        /* Sections */
+        section {
+            min-height: 100vh;
+            padding: 120px 40px 80px;
+            max-width: 1400px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 1;
+        }
+
+        section h2 {
+            font-size: 3.5em;
+            margin-bottom: 20px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            font-weight: 800;
+            position: relative;
+            display: inline-block;
+        }
+
+        section h2::before {
+            content: attr(data-text);
+            position: absolute;
+            top: 0;
+            left: 0;
+            z-index: -1;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            filter: blur(15px);
+            opacity: 0.5;
+        }
+
+        .section-subtitle {
+            font-size: 1.1em;
+            color: #888;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            margin-bottom: 15px;
+            font-weight: 600;
+        }
+
+        /* Hero Section */
+        #home {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: flex-start;
+            padding-top: 80px;
+            position: relative;
+        }
+
+        .hero-content {
+            max-width: 900px;
+            animation: fadeInUp 1s ease;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(40px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .profile-image-container {
+            width: 200px;
+            height: 200px;
+            margin-bottom: 40px;
+            border-radius: 50%;
+            border: 4px solid rgba(102, 126, 234, 0.5);
+            overflow: hidden;
+            box-shadow: 
+                0 0 40px rgba(102, 126, 234, 0.4),
+                0 0 80px rgba(118, 75, 162, 0.2);
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.5s ease;
+            animation: float 6s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-20px); }
+        }
+
+        .profile-image-container:hover {
+            transform: scale(1.1) rotate(5deg);
+            box-shadow: 
+                0 0 60px rgba(102, 126, 234, 0.6),
+                0 0 120px rgba(118, 75, 162, 0.4);
+        }
+
+        .profile-image-container img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .profile-placeholder {
+            font-size: 5em;
+            color: white;
+        }
+
+        .hero-greeting {
+            font-size: 1.5em;
+            color: #888;
+            margin-bottom: 10px;
+        }
+
+        h1 {
+            font-size: 5em;
+            margin-bottom: 20px;
+            font-weight: 900;
+            line-height: 1.1;
+        }
+
+        h1 .highlight {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .hero-description {
+            font-size: 1.5em;
+            color: #b0b0b0;
+            margin-bottom: 40px;
+            line-height: 1.6;
+        }
+
+        .contact-info {
+            display: flex;
+            gap: 30px;
+            flex-wrap: wrap;
+            margin-top: 30px;
+        }
+
+        .contact-info a {
+            color: #b0b0b0;
+            text-decoration: none;
+            font-size: 1.1em;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .contact-info a:hover {
+            color: #667eea;
+            transform: translateY(-3px);
+        }
+
+        /* Summary */
+        .summary {
+            font-size: 1.2em;
+            line-height: 1.9;
+            color: #b0b0b0;
+            max-width: 1000px;
+            margin-top: 30px;
+        }
+
+        /* Experience Timeline */
+        .timeline {
+            position: relative;
+            padding: 50px 0;
+            margin-top: 50px;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 50%;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: linear-gradient(180deg, #667eea 0%, #764ba2 100%);
+            transform: translateX(-50%);
+        }
+
+        .timeline-item {
+            margin-bottom: 80px;
+            position: relative;
+            display: flex;
+            justify-content: space-between;
+            gap: 50px;
+        }
+
+        .timeline-item:nth-child(even) {
+            flex-direction: row-reverse;
+        }
+
+        .timeline-content {
+            width: 45%;
+            padding: 30px;
+            background: rgba(20, 20, 35, 0.8);
+            border: 1px solid rgba(102, 126, 234, 0.3);
+            border-radius: 15px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
+            transition: all 0.4s ease;
+            position: relative;
+        }
+
+        .timeline-content:hover {
+            transform: translateY(-10px);
+            border-color: rgba(102, 126, 234, 0.6);
+            box-shadow: 0 20px 60px rgba(102, 126, 234, 0.3);
+        }
+
+        .timeline-dot {
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 30px;
+            height: 30px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border: 5px solid #0a0a0f;
+            border-radius: 50%;
+            z-index: 10;
+            box-shadow: 0 0 20px rgba(102, 126, 234, 0.6);
+        }
+
+        .timeline-date {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: rgba(20, 20, 35, 0.9);
+            padding: 8px 20px;
+            border-radius: 20px;
+            border: 1px solid rgba(102, 126, 234, 0.3);
+            color: #667eea;
+            font-weight: 600;
+            white-space: nowrap;
+            font-size: 0.9em;
+        }
+
+        .image-placeholder {
+            width: 100%;
+            height: 200px;
+            background: linear-gradient(135deg, rgba(102, 126, 234, 0.2) 0%, rgba(118, 75, 162, 0.2) 100%);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 20px;
+            color: #667eea;
+            font-size: 1.1em;
+            overflow: hidden;
+            border: 1px solid rgba(102, 126, 234, 0.2);
+            transition: all 0.3s ease;
+        }
+
+        .image-placeholder:hover {
+            border-color: rgba(102, 126, 234, 0.5);
+            transform: scale(1.02);
+        }
+
+        .image-placeholder img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .job-title, .degree-title {
+            font-size: 1.5em;
+            color: white;
+            margin-bottom: 8px;
+            font-weight: 700;
+        }
+
+        .company, .institution {
+            color: #667eea;
+            margin-bottom: 20px;
+            font-size: 1.1em;
+            font-weight: 600;
+        }
+
+        .responsibilities ul, .research-area ul {
+            margin-left: 20px;
+            margin-top: 15px;
+        }
+
+        .responsibilities li, .research-area li {
+            margin-bottom: 12px;
+            line-height: 1.7;
+            color: #b0b0b0;
+            position: relative;
+            padding-left: 15px;
+        }
+
+        .responsibilities li::before {
+            content: '▸';
+            position: absolute;
+            left: 0;
+            color: #667eea;
+            font-weight: bold;
+        }
+
+        .research-label {
+            font-weight: bold;
+            color: #667eea;
+            margin-top: 20px;
+            margin-bottom: 10px;
+            font-size: 1.1em;
+        }
+
+        .research-area p {
+            color: #b0b0b0;
+            line-height: 1.8;
+        }
+
+        /* Skills Grid */
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+            margin-top: 50px;
+        }
+
+        .skills-category {
+            padding: 35px;
+            background: rgba(20, 20, 35, 0.8);
+            border: 1px solid rgba(102, 126, 234, 0.3);
+            border-radius: 15px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
+            transition: all 0.4s ease;
+        }
+
+        .skills-category:hover {
+            transform: translateY(-15px);
+            border-color: rgba(102, 126, 234, 0.6);
+            box-shadow: 0 20px 60px rgba(102, 126, 234, 0.3);
+        }
+
+        .skills-category h3 {
+            font-size: 1.5em;
+            color: white;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .skill-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            margin-top: 20px;
+        }
+
+        .skill-tag {
+            background: linear-gradient(135deg, rgba(102, 126, 234, 0.3) 0%, rgba(118, 75, 162, 0.3) 100%);
+            color: white;
+            padding: 10px 18px;
+            border-radius: 25px;
+            font-size: 0.9em;
+            border: 1px solid rgba(102, 126, 234, 0.4);
+            transition: all 0.3s ease;
+            cursor: default;
+            font-weight: 500;
+        }
+
+        .skill-tag:hover {
+            transform: scale(1.1);
+            background: linear-gradient(135deg, rgba(102, 126, 234, 0.5) 0%, rgba(118, 75, 162, 0.5) 100%);
+            box-shadow: 0 5px 20px rgba(102, 126, 234, 0.4);
+        }
+
+        /* Gallery Grid */
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 30px;
+            margin-top: 50px;
+        }
+
+        .gallery-item {
+            height: 280px;
+            background: rgba(20, 20, 35, 0.8);
+            border: 1px solid rgba(102, 126, 234, 0.3);
+            border-radius: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #667eea;
+            font-size: 1.2em;
+            overflow: hidden;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
+            transition: all 0.4s ease;
+            cursor: pointer;
+        }
+
+        .gallery-item:hover {
+            transform: scale(1.05) translateY(-10px);
+            border-color: rgba(102, 126, 234, 0.6);
+            box-shadow: 0 20px 60px rgba(102, 126, 234, 0.4);
+        }
+
+        .gallery-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.4s ease;
+        }
+
+        .gallery-item:hover img {
+            transform: scale(1.1);
+        }
+
+        /* Scroll Indicator */
+        .scroll-indicator {
+            position: absolute;
+            bottom: 40px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 10px;
+            color: #667eea;
+            animation: bounce 2s infinite;
+        }
+
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% { transform: translateX(-50%) translateY(0); }
+            40% { transform: translateX(-50%) translateY(-10px); }
+            60% { transform: translateX(-50%) translateY(-5px); }
+        }
+
+        .scroll-indicator::after {
+            content: '↓';
+            font-size: 2em;
+        }
+
+        @media print {
+            nav { display: none; }
+            body { background: white; color: black; }
+        }
+
+        @media (max-width: 1024px) {
+            .timeline::before {
+                left: 30px;
+            }
+
+            .timeline-item {
+                flex-direction: column !important;
+                padding-left: 80px;
+            }
+
+            .timeline-content {
+                width: 100%;
+            }
+
+            .timeline-dot {
+                left: 30px;
+            }
+
+            .timeline-date {
+                left: 30px;
+                top: -40px;
+                transform: translate(-50%, 0);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+                flex-direction: column;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                right: 0;
+                background: rgba(15, 15, 25, 0.98);
+                padding: 20px;
+                gap: 10px;
+                border-top: 1px solid rgba(102, 126, 234, 0.2);
+            }
+
+            .nav-links.active {
+                display: flex;
+            }
+
+            .menu-toggle {
+                display: flex;
+            }
+
+            section {
+                padding: 100px 20px 60px;
+            }
+
+            section h2 {
+                font-size: 2.5em;
+            }
+
+            h1 {
+                font-size: 3em;
+            }
+
+            .hero-description {
+                font-size: 1.2em;
+            }
+
+            .profile-image-container {
+                width: 150px;
+                height: 150px;
+            }
+
+            .skills-grid, .gallery-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav>
+        <div class="nav-container">
+            <a href="#home" class="logo">A bit about me</a>
+            <div class="menu-toggle" onclick="toggleMenu()">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+            <ul class="nav-links" id="navLinks">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#experience">Experience</a></li>
+                <li><a href="#education">Education</a></li>
+                <li><a href="#skills">Skills</a></li>
+                <li><a href="#research">Research</a></li>
+                <li><a href="#startup">Startup</a></li>
+                <li><a href="#gallery">Projects</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- HOME SECTION -->
+    <section id="home">
+        <div class="hero-content">
+            <div class="profile-image-container">
+                <img src="../images/me.jpeg" style="width: 100%; height: auto;" alt="Profile Photo">
+            </div>
+            <p class="hero-greeting">Hi, I'm</p>
+            <h1><span class="highlight">Sebastian</span></h1>
+            <p class="hero-description">
+                I like backend development, orchestration, automation and microservices. I do some leadership management and finance research on the side.
+            </p>
+            <div class="contact-info">
+                <a href="mailto:mihaisebastian2507@gmail.com">📧 mihaisebastian2507@gmail.com</a>
+                <a href="tel:+31657204669">📱 +31 6 57204669</a>
+                <a href="https://linkedin.com/in/sebastian-mihai" target="_blank">💼 LinkedIn</a>
+                <a href="https://github.com/sebastianmihai01" target="_blank">💻 GitHub</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- SUMMARY SECTION -->
+    <section id="about" style="min-height: auto; padding-top: 80px; padding-bottom: 80px;">
+        <div class="section-subtitle">INTRODUCTION</div>
+        <h2 data-text="Overview.">Overview.</h2>
+        <p class="summary">
+            Software Engineer with 5 years of progressive experience and double background in Business Administration (Leadership/Finance) and Computer Engineering. Experience with building scalable cloud-based backend, orchestration, automation and microservices using AWS, Docker, Kubernetes, Terraform, SQL, Rest APIs, DevOps, CI/CD and event-driven architecture. Double M.BA education in leading teams and enabling employees to achieve their potential, understand team dynamics and moral identities. Research areas in sustainability and strategic AI usage.
+        </p>
+    </section>
+
+    <!-- EXPERIENCE SECTION -->
+    <section id="experience">
+        <div class="section-subtitle">WHAT I HAVE DONE SO FAR</div>
+        <h2 data-text="Work Experience.">Work Experience.</h2>
+
+        <div class="timeline">
+            <div class="timeline-item">
+                <div class="timeline-content">
+                    <div class="image-placeholder" style="height: 100px; font-size: 3em;">
+                        🏭
+                    </div>
+                    <div class="job-title">Software Architect (Engineer)</div>
+                    <div class="company">XIP BV — Enschede, The Netherlands</div>
+                    <div class="responsibilities">
+                        <ul>
+                            <li>Implemented cloud-based microservices for a factory automation platform using AWS, Docker/Kubernetes, NGINX, Redis, Python and Redis which raised considerable capital from regional investors.</li>
+                            <li>Deployed the initial node-based communication infrastructure with factory machines, consisting of math, problem solving and communication with other departments.</li>
+                            <li>Designed the frontend-backend protocols using REST, NodeJS, ReactJS and PostgreSQL.</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="timeline-dot"></div>
+                <div class="timeline-date">February 2025 - Present</div>
+            </div>
+
+            <div class="timeline-item">
+                <div class="timeline-content">
+                    <div class="image-placeholder" style="height: 100px; font-size: 3em;">
+                        🏨
+                    </div>
+                    <div class="job-title">Software Engineer</div>
+                    <div class="company">Booking Experts BV — Enschede, The Netherlands</div>
+                    <div class="responsibilities">
+                        <ul>
+                            <li>Collaborated with the DevOps team, improving and achieving 99.9% uptime availability.</li>
+                            <li>Migrated, refactored and scaled more than 15 CMS (10% legacy codebase) components with Ruby on Rails, React, OOP, Turbo to deploy CMS integrations (Pipedrive).</li>
+                            <li>Initially led the design of the Kubernetes architecture using AWS, Terraform, NGINX, Docker, Prometheus and HELM.</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="timeline-dot"></div>
+                <div class="timeline-date">August 2022 - December 2024</div>
+            </div>
+
+            <div class="timeline-item">
+                <div class="timeline-content">
+                    <div class="image-placeholder" style="height: 100px; font-size: 3em;">
+                        🚀
+                    </div>
+                    <div class="job-title">Backend Developer Intern</div>
+                    <div class="company">DEPT Agency — Amsterdam/Rotterdam, The Netherlands</div>
+                    <div class="responsibilities">
+                        <ul>
+                            <li>Developed 5+ event-driven microservices (Headless, Event-Driven) with AWS, Kafka, SQS, SNS and NodeJS to migrate and integrate ERP system(s), resulting in a 30% throughput increase.</li>
+                            <li>Collaborated in Agile cross-team assignments; deployed, refactored and maintained service-oriented (React) components for the e-commerce checkout portal.</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="timeline-dot"></div>
+                <div class="timeline-date">February 2021 - July 2022</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- EDUCATION SECTION -->
+    <section id="education">
+        <div class="section-subtitle">MY ACADEMIC JOURNEY</div>
+        <h2 data-text="Education.">Education.</h2>
+
+        <div class="timeline">
+            <div class="timeline-item">
+                <div class="timeline-content">
+                    <div class="image-placeholder">
+                    <img src="../images/uva.jpg" alt="UvA">
+                    </div>
+                    <div class="degree-title">Master of Business Administration (M-BA) - Leadership and Management</div>
+                    <div class="institution">University of Amsterdam</div>
+                    <div class="research-area">
+                        <div class="research-label">Research Focus:</div>
+                        <p>How Employees Strategically Deflect AI Responsibility Delegation Through Enactment of Moral Identity</p>
+                    </div>
+                </div>
+                <div class="timeline-dot"></div>
+                <div class="timeline-date">2026</div>
+            </div>
+
+            <div class="timeline-item">
+                <div class="timeline-content">
+                    <div class="image-placeholder">
+                    <img src="../images/ut.jpg" alt="Research">
+                    </div>
+                    <div class="degree-title">Master of Business Administration (M-BA) - Strategy and Innovation</div>
+                    <div class="institution">University of Twente</div>
+                    <div class="research-area">
+                        <div class="research-label">Research Focus:</div>
+                        <p>An NLP (Latent Dirichlet Allocation) Analysis of Corporate Disclosures to Identify Business Capabilities</p>
+                    </div>
+                </div>
+                <div class="timeline-dot"></div>
+                <div class="timeline-date">2025</div>
+            </div>
+
+            <div class="timeline-item">
+                <div class="timeline-content">
+                    <div class="image-placeholder">
+                    <img src="../images/ut.jpg" alt="Research">
+                    </div>
+                    <div class="degree-title">Bachelor of Science (BSc) - Computer Engineering</div>
+                    <div class="institution">University of Twente</div>
+                    <div class="research-area">
+                        <div class="research-label">Research Focus:</div>
+                        <p>Domain-Driven Against Dataflow-Driven Microservices Architecture: A Qualitative Evaluation</p>
+                    </div>
+                </div>
+                <div class="timeline-dot"></div>
+                <div class="timeline-date">2023</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SKILLS SECTION -->
+    <section id="skills">
+        <div class="section-subtitle">MY EXPERTISE</div>
+        <h2 data-text="Technical Skills.">Technical Skills.</h2>
+        
+        <div class="skills-grid">
+            <div class="skills-category">
+                <h3>💻 Programming Languages</h3>
+                <div class="skill-list">
+                    <span class="skill-tag">Python</span>
+                    <span class="skill-tag">Java</span>
+                    <span class="skill-tag">Ruby</span>
+                    <span class="skill-tag">Ruby on Rails</span>
+                    <span class="skill-tag">JavaScript</span>
+                    <span class="skill-tag">NodeJS</span>
+                </div>
+            </div>
+
+            <div class="skills-category">
+                <h3>☁️ Cloud & DevOps</h3>
+                <div class="skill-list">
+                    <span class="skill-tag">AWS</span>
+                    <span class="skill-tag">Docker</span>
+                    <span class="skill-tag">Kubernetes</span>
+                    <span class="skill-tag">Terraform</span>
+                    <span class="skill-tag">CI/CD</span>
+                    <span class="skill-tag">NGINX</span>
+                    <span class="skill-tag">Prometheus</span>
+                    <span class="skill-tag">HELM</span>
+                </div>
+            </div>
+
+            <div class="skills-category">
+                <h3>⚙️ Backend & Data</h3>
+                <div class="skill-list">
+                    <span class="skill-tag">Microservices</span>
+                    <span class="skill-tag">REST APIs</span>
+                    <span class="skill-tag">Event-Driven</span>
+                    <span class="skill-tag">Kafka</span>
+                    <span class="skill-tag">Redis</span>
+                    <span class="skill-tag">PostgreSQL</span>
+                    <span class="skill-tag">SQS</span>
+                    <span class="skill-tag">SNS</span>
+                </div>
+            </div>
+
+            <div class="skills-category">
+                <h3>🎨 Frontend & Tools</h3>
+                <div class="skill-list">
+                    <span class="skill-tag">React</span>
+                    <span class="skill-tag">ReactJS</span>
+                    <span class="skill-tag">Turbo</span>
+                    <span class="skill-tag">OOP</span>
+                    <span class="skill-tag">Agile</span>
+                </div>
+            </div>
+
+            <div class="skills-category">
+                <h3>🤖 AI & Research</h3>
+                <div class="skill-list">
+                    <span class="skill-tag">Artificial Intelligence</span>
+                    <span class="skill-tag">NLP</span>
+                    <span class="skill-tag">TensorFlow</span>
+                    <span class="skill-tag">Keras</span>
+                    <span class="skill-tag">CNN</span>
+                </div>
+            </div>
+
+            <div class="skills-category">
+                <h3>🌍 Languages</h3>
+                <div class="skill-list">
+                    <span class="skill-tag">English (C2, Fluent)</span>
+                    <span class="skill-tag">Dutch (A1, Learning)</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- RESEARCH SECTION -->
+    <section id="research">
+        <div class="section-subtitle">AREAS OF INTEREST</div>
+        <h2 data-text="Research.">Research.</h2>
+        
+        <div class="timeline-content">
+            <div class="image-placeholder">
+                <img src="../images/lda.png" alt="Research">
+            </div>
+            <div class="degree-title">🌱 Sustainability & Strategic AI Usage</div>
+            <div class="research-area">
+                <p><strong>Research areas:</strong> Sustainability and ESG reporting, metrics and taxonomies, Moral identity, employee strategic disengagement, leadership strategies, NLP and analysis of latent corporate discourse.</p>
+                <ul>
+                    <li>Focus on sustainability metrics and ESG reporting frameworks</li>
+                    <li>Study of moral identity and its impact on organizational behavior</li>
+                    <li>Leadership strategies for employee engagement and retention</li>
+                    <li>Natural Language Processing applications in corporate discourse analysis</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <!-- STARTUP SECTION -->
+    <section id="startup" style="min-height: auto; padding-top: 80px; padding-bottom: 80px;">
+        <div class="section-subtitle">ENTREPRENEURSHIP</div>
+        <h2 data-text="Startup.">Startup.</h2>
+        
+        <div class="timeline-content">
+            <div class="image-placeholder">
+                <img src="../images/ordelis.png" alt="Finance Automation Tool">
+            </div>
+            <div class="degree-title">🚀 Finance Automation Tool</div>
+            <div class="research-area">
+                <p>Developed my own startup which was a finance automation tool, based on modular, scalable, pre-trained and no-code AI components.</p>
+                <ul>
+                    <li>Built with modular and scalable architecture for easy customization</li>
+                    <li>Leveraged pre-trained AI models for quick deployment</li>
+                    <li>No-code interface for non-technical users</li>
+                    <li><a href="https://www.utchallenge.nl/candidate/details/42276" target="_blank" style="color: #667eea;">View Project Details →</a></li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <!-- GALLERY SECTION -->
+    <section id="gallery">
+        <div class="section-subtitle">MY WORK</div>
+        <h2 data-text="Projects.">Projects (See on GitHub).</h2>
+        <p style="margin-bottom: 20px; font-size: 1.15em; color: #888; max-width: 800px;">
+            Following projects showcase my skills and experience through real-world examples of my work. Each project demonstrates my ability to solve complex problems and work with different technologies.
+        </p>
+        
+        <div class="gallery-grid">
+            <div class="gallery-item" style="flex-direction: column; padding: 30px; text-align: left; height: auto; min-height: 280px; justify-content: flex-start;">
+                <div style="font-size: 2.5em; margin-bottom: 15px;">🚗</div>
+                <h3 style="color: #667eea; font-size: 1.5em; margin-bottom: 10px;">Self-Driving-Car</h3>
+                <p style="color: #b0b0b0; margin-bottom: 15px; flex-grow: 1;">Self Driving Car, using Bellman Ford, sensor fusion and visual odometry</p>
+                <div style="display: flex; gap: 10px; align-items: center;">
+                    <span style="background: rgba(102, 126, 234, 0.3); padding: 5px 12px; border-radius: 15px; font-size: 0.85em;">R</span>
+                    <span style="color: #888;">⭐ 2</span>
+                </div>
+            </div>
+
+            <div class="gallery-item" style="flex-direction: column; padding: 30px; text-align: left; height: auto; min-height: 280px; justify-content: flex-start;">
+                <div style="font-size: 2.5em; margin-bottom: 15px;">🎯</div>
+                <h3 style="color: #667eea; font-size: 1.5em; margin-bottom: 10px;">Object-Detection-Classifier</h3>
+                <p style="color: #b0b0b0; margin-bottom: 15px; flex-grow: 1;">Object Detection using Tensorflow API & CNN</p>
+                <div style="display: flex; gap: 10px; align-items: center;">
+                    <span style="background: rgba(102, 126, 234, 0.3); padding: 5px 12px; border-radius: 15px; font-size: 0.85em;">Python</span>
+                    <span style="color: #888;">⭐ 1</span>
+                </div>
+            </div>
+
+            <div class="gallery-item" style="flex-direction: column; padding: 30px; text-align: left; height: auto; min-height: 280px; justify-content: flex-start;">
+                <div style="font-size: 2.5em; margin-bottom: 15px;">✍️</div>
+                <h3 style="color: #667eea; font-size: 1.5em; margin-bottom: 10px;">Handwriting-Recognition-AI</h3>
+                <p style="color: #b0b0b0; margin-bottom: 15px; flex-grow: 1;">A handwriting detection program (based on MNIST and Keras), where the neural network predicts the digits that you draw on a canvas</p>
+                <div style="display: flex; gap: 10px; align-items: center;">
+                    <span style="background: rgba(102, 126, 234, 0.3); padding: 5px 12px; border-radius: 15px; font-size: 0.85em;">Python</span>
+                    <span style="color: #888;">⭐ 1</span>
+                </div>
+            </div>
+
+            <div class="gallery-item" style="flex-direction: column; padding: 30px; text-align: left; height: auto; min-height: 280px; justify-content: flex-start;">
+                <div style="font-size: 2.5em; margin-bottom: 15px;">🎮</div>
+                <h3 style="color: #667eea; font-size: 1.5em; margin-bottom: 10px;">2D-libGDX-game</h3>
+                <p style="color: #b0b0b0; margin-bottom: 15px; flex-grow: 1;">2D Android Studio mobile shooter made with LibGDX</p>
+                <div style="display: flex; gap: 10px; align-items: center;">
+                    <span style="background: rgba(230, 180, 80, 0.3); padding: 5px 12px; border-radius: 15px; font-size: 0.85em; border: 1px solid rgba(230, 180, 80, 0.4);">Java</span>
+                    <span style="color: #888;">⭐ 1</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        // Mobile Menu Toggle
+        function toggleMenu() {
+            document.getElementById('navLinks').classList.toggle('active');
+        }
+
+        // Close mobile menu when clicking a link
+        document.querySelectorAll('.nav-links a').forEach(link => {
+            link.addEventListener('click', () => {
+                document.getElementById('navLinks').classList.remove('active');
+            });
+        });
+
+        // Close mobile menu when clicking outside
+        document.addEventListener('click', function(event) {
+            const nav = document.querySelector('nav');
+            const menu = document.getElementById('navLinks');
+            if (!nav.contains(event.target)) {
+                menu.classList.remove('active');
+            }
+        });
+
+        // Add active state to nav links on scroll
+        window.addEventListener('scroll', () => {
+            const sections = document.querySelectorAll('section');
+            const navLinks = document.querySelectorAll('.nav-links a');
+            
+            let current = '';
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                const sectionHeight = section.clientHeight;
+                if (scrollY >= (sectionTop - 200)) {
+                    current = section.getAttribute('id');
+                }
+            });
+
+            navLinks.forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('href').slice(1) === current) {
+                    link.classList.add('active');
+                }
+            });
+        });
+    </script>
+</body>
+</html>
